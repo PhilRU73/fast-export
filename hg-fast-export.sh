@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright (c) 2007, 2008 Rocco Rutte <pdmef@gmx.net> and others.
 # License: MIT <http://www.opensource.org/licenses/mit-license.php>
@@ -27,6 +27,10 @@ SFX_HEADS="heads"
 SFX_STATE="state"
 GFI_OPTS=""
 PYTHON=${PYTHON:-python2}
+
+if [[ "$(uname)" == "CYGWIN"* ]] && [[ "$(which $PYTHON)" != "/usr/bin/"* ]]; then
+	ROOT="$(cygpath -aw $ROOT)"
+fi
 
 USAGE="[--quiet] [-r <repo>] [--force] [-m <max>] [-s] [--hgtags] [-A <file>] [-B <file>] [-T <file>] [-M <name>] [-o <name>] [--hg-hash] [-e <encoding>]"
 LONG_USAGE="Import hg repository <repo> up to either tip or <max>
